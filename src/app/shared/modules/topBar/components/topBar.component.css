@@ -1,0 +1,9 @@
+.userlog{
+	float:right;
+	padding:20px;
+	display: none;
+	cursor:pointer;
+	position:relative;
+	padding-right:0;
+	position: relative;
+}

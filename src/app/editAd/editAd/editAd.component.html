@@ -1,0 +1,8 @@
+<egate-ad-form
+   *ngIf="initialValues$ | async"
+  [initialValues]="initialValues$ | async"
+  [isSubmitting]="isSubmitting$ | async"
+  [errors]="backendErrors$ | async"
+  (adSubmit)="onSubmit($event)"
+ 
+></egate-ad-form>

@@ -1,0 +1,176 @@
+<ng-container *ngIf="isAnonymous$ | async">
+  <header id="wt-header" class="wt-header wt-haslayout">
+    <div class="wt-navigationarea">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <a class="wt-logo" [routerLink]="['/']"
+              ><img src="/assets/images/logo.png" 
+            /></a>
+            <div class="wt-rightarea">
+              <nav id="wt-nav" class="wt-nav navbar-expand-lg">
+                <button
+                  class="navbar-toggler"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#navbarNav"
+                  aria-controls="navbarNav"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation"
+                >
+                  <i class="lnr lnr-menu"></i>
+                </button>
+                <div
+                  class="collapse navbar-collapse wt-navigation"
+                  id="navbarNav"
+                >
+                  <ul class="navbar-nav">
+                    <li class="menu-item-has-children page_item_has_children">
+                      <a [routerLink]="['/']">Home</a>
+                    </li>
+
+                    <li class="menu-item-has-children page_item_has_children">
+                      <a href="javascript:void(0);">Browse Ads</a>
+                      <ul class="sub-menu">
+                        <li>
+                          <a href="joblisting.html">Ad Listing</a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+              <div class="wt-loginarea">
+                <div class="wt-loginoption">
+                  <a
+                    [routerLink]="['/login']"
+                    id="wt-loginbtn"
+                    class="wt-loginbtn"
+                    >Login</a
+                  >
+                  <div class="wt-loginformhold"></div>
+                </div>
+                <a [routerLink]="['/register']" class="wt-btn">Join Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+</ng-container>
+
+<ng-container *ngIf="isLoggedIn$ | async">
+
+  <header id="wt-header" class="wt-header wt-haslayout">
+    <div class="wt-navigationarea">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <strong class="wt-logo"
+              ><a href="index-2.html">
+                <img src="/assets/images/logo.png" alt="company logo here" /></a
+            ></strong>
+            <div class="wt-rightarea">
+              <nav id="wt-nav" class="wt-nav navbar-expand-lg">
+                <button
+                  class="navbar-toggler"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#navbarNav"
+                  aria-controls="navbarNav"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation"
+                >
+                  <i class="lnr lnr-menu"></i>
+                </button>
+                <div
+                  class="collapse navbar-collapse wt-navigation"
+                  id="navbarNav"
+                >
+                  <ul class="navbar-nav">
+                    <li class="menu-item-has-children page_item_has_children">
+                      <a [routerLink]="['/']">Home</a>
+                    </li>
+
+                    <li class="menu-item-has-children page_item_has_children">
+                      <a href="javascript:void(0);">Browse Ads</a>
+                      <ul class="sub-menu">
+                        <li>
+                          <a href="joblisting.html">Ad Listings</a>
+                        </li>
+                        <li class="current-menu-item">
+                          <a href="jobsingle.html">Post Ad</a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+
+              <div class="wt-userlogedin">
+                
+                  <figure class="wt-userimg">
+                    <img [src]="(currentUser$ | async).image" />
+                  </figure>
+                
+                
+                <div class="wt-username">
+              
+                   {{ (currentUser$ | async).username }}
+                  <span></span>
+                </div>
+                <nav class="wt-usernav">
+                  <ul>
+                    
+                    <li>
+                      <a
+                        [routerLink]="[
+                          '/profiles',
+                          (currentUser$ | async).username
+                        ]"
+                      >
+                        <span>My Profile</span>
+                      </a>
+                    </li>
+                   
+                    <li>
+                      <a href="dashboard-managejobs.html">
+                        <span>Manage Ads</span>
+                      </a>
+                    </li>
+                    <li class="">
+                      <a href="javascript:void(0);">
+                        <span>Messages</span>
+                      </a>
+                      <ul class="sub-menu">
+                        <li><a href="dashboard-messages.html">Messages</a></li>
+                        <li>
+                          <a href="dashboard-messages2.html">Messages V 2</a>
+                        </li>
+                      </ul>
+                    </li>
+                   
+                    <li>
+                      <a href="dashboard-accountsettings.html">
+                        <span>Account Settings</span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="index-2.html">
+                        <span>Logout</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </header>
+
+</ng-container>

@@ -1,0 +1,7 @@
+
+<div class="wt-checkboxholder wt-verticalscrollbar">
+    <span class="wt-checkbox" *ngFor="let topTag of topTags$ | async">
+        <input  type="checkbox" name="description" value="company">
+       <a [routerLink]="['/tags', topTag]">{{topTag}}</a>
+    </span>
+</div>

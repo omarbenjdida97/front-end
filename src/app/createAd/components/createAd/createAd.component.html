@@ -1,0 +1,7 @@
+<egate-ad-form
+  [initialValues]="initialValues"
+  [errors]="backendErrors$ | async"
+  [isSubmitting]="isSubmitting$ | async"
+  (adSubmit)="onSubmit($event)"
+ 
+></egate-ad-form>
