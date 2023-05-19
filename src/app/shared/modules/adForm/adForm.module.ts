@@ -5,12 +5,14 @@ import { AdFormComponent } from 'src/app/shared/modules/adForm/components/adForm
 import { BackendErrorsMessagesModule } from '../backendErrorMessages/backendErrorMessages.module';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
-
 @NgModule({
-  imports: [CommonModule, BackendErrorsMessagesModule, ReactiveFormsModule, BackendErrorsMessagesModule],
+  imports: [
+    CommonModule,
+    BackendErrorsMessagesModule,
+    ReactiveFormsModule,
+    BackendErrorsMessagesModule,
+  ],
   declarations: [AdFormComponent],
-  exports: [AdFormComponent]
-  
+  exports: [AdFormComponent],
 })
 export class AdFormModule {}

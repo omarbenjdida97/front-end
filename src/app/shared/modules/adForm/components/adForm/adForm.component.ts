@@ -39,6 +39,6 @@ export class AdFormComponent implements OnInit {
 
   onSubmit(): void {
     this.adSubmitEvent.emit(this.form.value);
+    
   }
-  
 }

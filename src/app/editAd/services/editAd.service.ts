@@ -11,7 +11,7 @@ export class EditAdService {
   constructor(private http: HttpClient) {}
 
   updateAd(slug: string, adInput: AdInputInterface): Observable<AdInterface> {
-    const fullUrl = `${environment.API_KEY}'/ads/${slug}`;
+    const fullUrl = environment.API_KEY + "/ads/" + slug;
     return this.http.put<SaveAdResponseInterface>(fullUrl, adInput).pipe(
       map((response: SaveAdResponseInterface) => {
         return response.ad;

@@ -33,12 +33,9 @@ export class CreateAdComponent implements OnInit{
   ngOnInit(): void {
     this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
     this.backendErrors$ = this.store.pipe(select(validationErrorsSelector));
-   
   }
 
   onSubmit(adInput: AdInputInterface ): void {
- 
-    this.store.dispatch(createAdAction( {adInput}));
-   
+    this.store.dispatch(createAdAction({ adInput }));
   }
 }
