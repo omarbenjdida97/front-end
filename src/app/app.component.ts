@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { getCurrentUserAction } from 'src/app/auth/store/actions/getCurrentUser.action';
 
@@ -9,10 +9,11 @@ import { getCurrentUserAction } from 'src/app/auth/store/actions/getCurrentUser.
 })
 export class AppComponent implements OnInit{ 
 
-  
+
   constructor(private store: Store) {}
   ngOnInit(): void {
       this.store.dispatch(getCurrentUserAction())
      
   }
+ 
 }

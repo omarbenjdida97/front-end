@@ -1,42 +1,117 @@
-
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <egate-backend-error-messages *ngIf="errorsProps" [backendErrors]="errorsProps">
-  </egate-backend-error-messages>
-    <div>
-      <label for="title">Title:</label>
-      <input type="text" id="title" formControlName="title">
+  <section class="wt-haslayout wt-dbsectionspace">
+    <div class="row" style="justify-content: center">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+        <div class="wt-dashboardbox">
+          <div class="wt-dashboardboxtitle">
+            <h2>Post a Job</h2>
+          </div>
+          <div class="wt-dashboardboxcontent">
+            <div class="wt-jobdescription wt-tabsinfo">
+              <egate-backend-error-messages
+                *ngIf="errorsProps"
+                [backendErrors]="errorsProps"
+              >
+              </egate-backend-error-messages>
+              <div class="wt-tabscontenttitle">
+                <h2>Job Description</h2>
+              </div>
+              <form class="wt-formtheme wt-userform wt-userformvtwo">
+                <fieldset>
+                  <div class="form-group" style="margin-bottom: 10px">
+                    <input
+                      type="text"
+                      name="title"
+                      class="form-control"
+                      placeholder="Job Title"
+                      id="title"
+                      formControlName="title"
+                    />
+                  </div>
+                  <div class="wt-tabscontenttitle">
+                    <h2>Job Type</h2>
+                  </div>
+                  <div
+                    class="wt-checkboxholder form-group form-group-half wt-formwithlabel"
+                  >
+                    <span class="wt-checkbox">
+                      <input
+                        id="online"
+                        type="checkbox"
+                        [checked]="isSelected('online')"
+                        (change)="toggleCheckbox('online')"
+                      />
+                      <label for="online">Online</label>
+                    </span>
+                    <span class="wt-checkbox">
+                      <input
+                        id="facetoface"
+                        type="checkbox"
+                        [checked]="isSelected('face-to-face')"
+                        (change)="getnear()"
+                        (change)="toggleCheckbox('face-to-face')"
+                      />
+                      <label for="facetoface">Face To Face</label>
+                    </span>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+            <div class="wt-jobdetails wt-tabsinfo">
+              <div class="wt-tabscontenttitle">
+                <h2>Job Details</h2>
+              </div>
+              <form class="wt-formtheme wt-userform wt-userformvtwo">
+                <fieldset>
+                  <div class="form-group">
+                    <textarea
+                      id="wt-tinymceeditor"
+                      class="wt-tinymceeditor"
+                      placeholder="Add Job Detail Here"
+                      formControlName="description"
+                      rows="3"
+                      style="width: 100%"
+                    ></textarea>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+            <div class="wt-details wt-tabsinfo">
+              <div class="wt-tabscontenttitle">
+                <h2>Tags</h2>
+              </div>
+              <form class="wt-formtheme wt-userform wt-userformvtwo">
+                <fieldset>
+                  <p>Please sperate the tags with a comma</p>
+                  
+                    <fieldset>
+                      <div class="form-group">
+                        <label for="tagList">Tags</label>
+                        <textarea
+                          id="tagList"
+                          class="wt-tinymceeditor"
+                          placeholder=""
+                          formControlName="tagList"
+                          rows="1"
+                          style="width: 100%"
+                          pattern="[a-zA-Z0-9\s]+"
+                        >{{ form.get('tagList').value  }}</textarea>
+                      </div>
+                    </fieldset>
+                 
+                 
+                  
+                </fieldset>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="wt-updatall">
+          <i class="ti-announcement"></i>
+          <span>Post job by just clicking on “Post Job Now” button.</span>
+          <button class="wt-btn" type="submit">Post Job Now</button>
+        </div>
+      </div>
     </div>
-    <div>
-      <label for="type">Type:</label>
-      <input type="text" id="type" formControlName="type">
-    </div>
-    <div>
-      <label for="profilePicture">Profile Picture:</label>
-      <input type="text" id="profilePicture" formControlName="profilePicture">
-    </div>
-    <div>
-      <label for="description">Description:</label>
-      <textarea id="description" formControlName="description"></textarea>
-    </div>
-    <div>
-      <label for="location">Location:</label>
-      <input type="text" id="location" formControlName="location">
-    </div>
-    <div>
-      <label for="lessonType">Lesson Type:</label>
-      <input type="text" id="lessonType" formControlName="lessonType">
-    </div>
-    <div>
-      <label for="hourlyRate">Hourly Rate:</label>
-      <input type="number" id="hourlyRate" formControlName="hourlyRate">
-    </div>
-    <div>
-      <label for="subject">Subject:</label>
-      <input type="text" id="subject" formControlName="subject">
-    </div>
-    <div>
-      <label for="tagList">Tags:</label>
-      <input type="text" id="tagList" formControlName="tagList">
-    </div>
-    <button type="submit">Submit</button>
-  </form>
+  </section>
+</form>

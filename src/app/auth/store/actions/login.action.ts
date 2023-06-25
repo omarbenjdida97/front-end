@@ -6,12 +6,12 @@ import { BackendErrorsInterface } from "src/app/shared/types/backendErrors.inter
 
 export const loginAction = createAction(
     ActionTypes.LOGIN,
-    props<{request: LoginRequestInterface}>()
+    props<{request: LoginRequestInterface; returnUrl?: string}>()
 )
 
 export const loginSuccessAction = createAction(
     ActionTypes.LOGIN_SUCCESS,
-    props<{currentUser: CurrentUserInterface}>()
+    props<{currentUser: CurrentUserInterface; returnUrl?: string}>()
 )
 
 export const loginFailureAction = createAction(

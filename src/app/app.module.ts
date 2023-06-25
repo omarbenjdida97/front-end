@@ -15,7 +15,13 @@ import { GlobalFeedModule } from 'src/app/globalFeed/globalFeed.module';
 import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
 import { AdModule } from 'src/app/ad/ad.module';
 import { CreateAdModule } from 'src/app/createAd/createAd.module';
-import { EditAdModule } from './editAd/editAd.module';
+import { EditAdModule } from 'src/app/editAd/editAd.module';
+import { HomepageModule } from 'src/app/homepage/homepage.module';
+import { SettingsModule } from 'src/app/settings/settings.module';
+import { UserProfileModule } from 'src/app/userProfile/userProfile.module';
+import { DashboardModule } from 'src/app/dashboard/dashboard.module';
+import { FooterModule } from './shared/modules/footer/footer.module';
+import { ChatSendModule } from './chatsend/chatSend.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,7 +41,14 @@ import { EditAdModule } from './editAd/editAd.module';
     GlobalFeedModule,
     CreateAdModule,
     AdModule,
-    EditAdModule
+    EditAdModule,
+    HomepageModule,
+    SettingsModule,
+    UserProfileModule,
+    DashboardModule,
+    FooterModule,
+    ChatSendModule
+    
   ],
   providers: [
     PersistanceService,

@@ -11,6 +11,11 @@ import { reducers } from 'src/app/ad/store/reducers';
 import { TagListModule } from "src/app/shared/modules/tagList/tagList.module";
 import { DeleteAdEffect } from 'src/app/ad/store/effects/deleteAd.effect';
 import { AdService } from 'src/app/ad/services/ad.service';
+import { AdCommentComponent } from './ad/adComment.component';
+import { CommentsService } from '../shared/services/comment.service';
+import { ApiService } from '../shared/services/api.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ChatSendComponent } from '../chatsend/chat.component';
 
 const routes = [{ path: 'ads/:slug', component: AdComponent }];
 
@@ -21,10 +26,11 @@ const routes = [{ path: 'ads/:slug', component: AdComponent }];
         RouterModule.forChild(routes),
         StoreModule.forFeature('ad', reducers),
         EffectsModule.forFeature([GetAdEffect, DeleteAdEffect]),
-        TagListModule
+        TagListModule,
+        ReactiveFormsModule 
     ],
-    declarations: [AdComponent],
+    declarations: [AdComponent, AdCommentComponent],
     exports: [],
-    providers: [SharedAdService, AdService],
+    providers: [SharedAdService, AdService, CommentsService, ApiService, ChatSendComponent],
 })
 export class AdModule {}

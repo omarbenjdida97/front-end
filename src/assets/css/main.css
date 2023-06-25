@@ -238,6 +238,7 @@ p ins { color: #666; }
 dl dd { margin-left: 20px; }
 address { font-style: italic; }
 /* Theme Custom Select */
+
 .wt-select {
 	color:#666;
 	float:left;

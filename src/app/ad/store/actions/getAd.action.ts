@@ -7,6 +7,11 @@ export const getAdAction = createAction(
   props<{ slug: string }>(),
 );
 
+export const getAdByIdAction = createAction(
+  ActionTypes.GET_AD,
+  props<{ authorId: number }>(),
+);
+
 export const getAdSuccessAction = createAction(
   ActionTypes.GET_AD_SUCCESS,
   props<{ ad: AdInterface }>(),

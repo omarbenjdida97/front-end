@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { getFeedAction } from 'src/app/shared/modules/feed/store/actions/getFeed.action';
@@ -15,14 +15,17 @@ import { getTopTagsAction } from 'src/app/shared/modules/topTags/store/actions/g
 import { PopularTagType } from 'src/app/shared/types/popularTag.type';
 import { topTagsSelector } from 'src/app/shared/modules/topTags/store/selectors';
 import { AdInterface } from 'src/app/shared/types/ad.interface';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'egate-feed',
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FeedComponent implements OnInit, OnDestroy {
   @Input('apiUrl') apiUrlProps: string;
+  searchText: string;
   feed$: Observable<GetFeedResponseInterface | null>;
   error$: Observable<string | null>;
   isLoading$: Observable<boolean>;
@@ -31,11 +34,20 @@ export class FeedComponent implements OnInit, OnDestroy {
   baseUrl: string;
   queryParamsSubscription: Subscription;
   currentPage: number;
+  latitude: number;
+  longitude: number;
   selectedTags: string[] = [];
+  selectedLocations: string[] = [];
+  searchTag: string;
+  lessonType: string;
+  filteredTags: string[] = [];
+  searchQuery: string = '';
+  locations: string;
+  feed: GetFeedResponseInterface | null;
   constructor(
     private store: Store,
     private router: Router,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -52,6 +64,15 @@ export class FeedComponent implements OnInit, OnDestroy {
         this.fetchFeed();
       },
     );
+    this.route.queryParams.subscribe((params: Params) => {
+      this.lessonType = params['type'];
+      this.searchTag = params['tags'];
+    });
+    this.route.queryParams.subscribe((params: Params) => {
+      this.latitude = params['latitude'];
+      this.longitude = params['longitude'];
+      this.searchTag = params['tags'];
+    });
   }
 
   ngOnDestroy(): void {
@@ -77,16 +98,46 @@ export class FeedComponent implements OnInit, OnDestroy {
     return uniqueTags;
   }
 
+  getLocationsFromAds(ads: AdInterface[]): string[] {
+    if (!ads) {
+      return [];
+    }
+  
+    const locations = ads
+      .flatMap((ad) => ad.location)
+      .map((location) => location.trim().toLowerCase());
+  
+    const uniqueLocations = [...new Set(locations)];
+    return uniqueLocations;
+  }
   fetchFeed(): void {
     const offset = this.currentPage * this.limit - this.limit;
     const parsedUrl = parseUrl(this.apiUrlProps);
-    const stringifiedParams = stringify({
+    const params: any = {
       limit: this.limit,
       offset,
-      tag: this.selectedTags.join(','),
       ...parsedUrl.query,
-    });
-    const apiUrlWithParams = `${parsedUrl.url}?${stringifiedParams}`;
+    };
+
+    if (this.selectedTags.length > 0) {
+      params.tags = this.selectedTags.join(',');
+    }
+    if (this.selectedLocations.length > 0) {
+      params.location = this.selectedLocations;
+    }
+    if (this.searchTag && this.lessonType) {
+      params.type = this.lessonType;
+      params.tags = this.searchTag;
+      this.searchTag = null;
+      this.lessonType = null;
+    }
+    if (this.searchTag && this.latitude && this.longitude) {
+      params.tags = this.searchTag;
+      params.latitude = this.latitude;
+      params.longitude = this.longitude;
+    }
+
+    const apiUrlWithParams = `${parsedUrl.url}?${stringify(params)}`;
 
     this.store.dispatch(getFeedAction({ url: apiUrlWithParams }));
     console.log(apiUrlWithParams);
@@ -110,4 +161,39 @@ export class FeedComponent implements OnInit, OnDestroy {
     }
     this.fetchFeed();
   }
+  onLocationSelectionChange(location: string, event: Event) {
+    const isChecked = (event.target as HTMLInputElement).checked;
+
+    if (isChecked) {
+      if (!this.selectedLocations.includes(location)) {
+        this.selectedLocations.push(location);
+      }
+    } else {
+      const index = this.selectedLocations.indexOf(location);
+      if (index !== -1) {
+        this.selectedLocations.splice(index, 1);
+      }
+    }
+    this.fetchFeed();
+  }
+  removeTag(tag: string) {
+    const index = this.selectedTags.indexOf(tag);
+    if (index !== -1) {
+      this.selectedTags.splice(index, 1);
+      this.fetchFeed();
+    }
+  }
+  removeLocation(location: string) {
+    const index = this.selectedLocations.indexOf(location);
+    if (index !== -1) {
+      this.selectedLocations.splice(index, 1);
+      this.fetchFeed();
+    }
+  }
+  clearAllFilters() {
+    this.selectedTags = [];
+
+    this.fetchFeed();
+  }
+ 
 }

@@ -15,16 +15,19 @@ import { AdInputInterface } from 'src/app/shared/types/adInput.interface';
   styleUrls: ['./createAd.component.css'],
 })
 export class CreateAdComponent implements OnInit{
+  
   initialValues: AdInputInterface = {
     title: '',
     description: '',
     location: '',
-    lessonType: '',
+    requiredSkills:[''],
     hourlyRate: 0,
     subject: '',
     tagList: [''],
-    type: '',
-    profilePicture: '',
+    type: [''],
+    aboutAuthor: '',
+    longitude: 0,
+    latitude: 0,
   };
   isSubmitting$: Observable<boolean>;
   backendErrors$: Observable<BackendErrorsInterface | null>;

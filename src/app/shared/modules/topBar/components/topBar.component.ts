@@ -1,6 +1,7 @@
 import { Component} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { logoutAction } from 'src/app/auth/store/actions/sync.action';
 import { currentUserSelector, isAnonynmousSelector, isLoggedInSelector } from 'src/app/auth/store/selectors';
 import { CurrentUserInterface } from 'src/app/shared/types/currentUser.interface';
 
@@ -26,5 +27,7 @@ export class TopBarComponent{
     this.currentUser$ = this.store.select(currentUserSelector);
     
   }
-  
+  logout(): void {
+    this.store.dispatch(logoutAction())
+  }
 }

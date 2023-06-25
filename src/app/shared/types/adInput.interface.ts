@@ -1,11 +1,13 @@
 export interface AdInputInterface {
     title: string;
-    type: string;
+    type: string[];
     description: string;
-    profilePicture: string;
+    aboutAuthor: string;
     location: string;
-    lessonType: string;
+    requiredSkills: string[];
     hourlyRate: number;
     subject: string;
     tagList: string[];
+    longitude: number;
+    latitude: number;
 }

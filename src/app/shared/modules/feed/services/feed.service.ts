@@ -12,4 +12,8 @@ export class FeedService {
     return this.http.get<GetFeedResponseInterface>(fullUrl);
    
   }
+  getAdsByAuthor(authorId: number): Observable<GetFeedResponseInterface> {
+    const fullUrl = `${environment.API_KEY}/ads?authorId=${authorId}`;
+    return this.http.get<GetFeedResponseInterface>(fullUrl);
+  }
 }

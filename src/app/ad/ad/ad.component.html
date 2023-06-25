@@ -27,10 +27,9 @@
             class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 float-left"
           >
             <div class="wt-proposalholder">
-              
               <div class="wt-proposalhead">
                 <h2>
-                 {{ad.title}}
+                  {{ ad.title }}
                 </h2>
                 <ul
                   class="wt-userlisting-breadcrumb wt-userlisting-breadcrumbvtwo"
@@ -39,32 +38,51 @@
                     <span
                       ><i class="fa fa-dollar-sign"></i
                       ><i class="fa fa-dollar-sign"></i
-                      ><i class="fa fa-dollar-sign"></i> {{ad.hourlyRate}}dt</span
+                      ><i class="fa fa-dollar-sign"></i>
+                      {{ ad.hourlyRate }}dt</span
+                    >
+                  </li>
+                  <li>
+                    <span> {{ ad.location }}</span>
+                  </li>
+                  <li>
+                    <span
+                      ><i class="far fa-folder"></i> Type: {{ ad.type }}</span
                     >
                   </li>
                   <li>
                     <span
-                      >
-                      {{ad.location}}</span
+                      ><i class="far fa-clock"></i> Date posted:
+                      {{ ad.createdAt | date : 'medium' }}</span
                     >
-                  </li>
-                  <li>
-                    <span><i class="far fa-folder"></i> Type: {{ad.type}}</span>
-                  </li>
-                  <li>
-                    <span><i class="far fa-clock"></i> Date posted: {{ad.createdAt | date : 'medium'}}</span>
                   </li>
                 </ul>
               </div>
+              <ng-container *ngIf="isLoggedIn$ | async">
+
               <div class="wt-btnarea" *ngIf="!(isAuthor$ | async)">
-                <a href="javascrip:void(0);" class="wt-btn">Apply</a>
+                <!--(click)="navigateToChat()"-->
+                <a href="javascrip:void(0);"  (click)="applyToAd(slug)" class="wt-btn">Apply</a>
               </div>
-              <div class="wt-btnarea" *ngIf="(isAuthor$ | async)">
-                <a [routerLink]="['/ads', ad.slug, 'edit']" class="wt-btn">Edit</a>
-                <button  (click)="deleteAd()" class="wt-btn" style="margin-left: 15px;">Delete</button>
+              </ng-container>
+              <ng-container *ngIf="isAnonymous$ | async">
+
+                <div class="wt-btnarea" *ngIf="!(isAuthor$ | async)">
+                  <a href="javascrip:void(0);"  [routerLink]="['/login']" [queryParams]="{ returnUrl: getCurrentUrl() }" class="wt-btn">Apply</a>
+                </div>
+                </ng-container>
+              <div class="wt-btnarea" *ngIf="isAuthor$ | async">
+                <a [routerLink]="['/ads', ad.slug, 'edit']" class="wt-btn"
+                  >Edit</a
+                >
+                <button
+                  (click)="deleteAd()"
+                  class="wt-btn"
+                  style="margin-left: 15px"
+                >
+                  Delete
+                </button>
               </div>
-             
-             
             </div>
           </div>
           <div
@@ -76,15 +94,12 @@
                   <h3>Job Detail</h3>
                 </div>
                 <div class="wt-description">
-                  <h4>About {{ad.author.username}}</h4>
+                  <h4>About {{ ad.author.username }}</h4>
                   <p>
-                    {{ad.description}}
+                    {{ ad.description }}
                   </p>
                   <h4>About the lesson</h4>
-                  <p>
-                   test test test test 
-                  </p>
-                 
+                  <p>test test test test</p>
                 </div>
               </div>
               <div class="wt-skillsrequired">
@@ -93,140 +108,46 @@
                 </div>
                 <egate-tag-list [tags]="ad.tagList"></egate-tag-list>
               </div>
-              
             </div>
             <main id="wt-main" class="wt-main wt-haslayout wt-innerbgcolor">
               <div class="wt-haslayout wt-main-section">
                 <div class="container">
                   <div class="row justify-content-md-center">
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 float-left">
+                    <div
+                      class="col-12 col-sm-12 col-md-12 col-lg-12 float-left"
+                    >
                       <div class="wt-articlesingle-holder wt-bgwhite">
                         <div class="wt-articlesingle-content">
                           <div id="wt-comments" class="wt-comments">
-                            <h2>03 Comments</h2>
+                            <h2>Comments</h2>
                             <ul>
                               <li>
-                                <div class="wt-author">
-                                  <div class="wt-authordetails">
-                                    <figure>
-                                      <a href="javascript:void(0);"
-                                        ><img
-                                          src="images/author/img-02.jpg"
-                                          alt="image description"
-                                      /></a>
-                                    </figure>
-                                    <div class="wt-authorcontent">
-                                      <div class="wt-authorhead">
-                                        <div class="wt-boxleft">
-                                          <h3>
-                                            <a href="javascript:void(0);"
-                                              >Shameka Mccarter</a
-                                            >
-                                          </h3>
-                                          <span>01 Min Ago</span>
-                                        </div>
-                                        <div class="wt-boxright">
-                                          <a class="wt-btnreply" href="javascript:void(0);"
-                                            ><span class="wt-clickreply"
-                                              >Click To Reply</span
-                                            ><i class="fa fa-mail-reply"></i
-                                          ></a>
-                                        </div>
-                                      </div>
-                                      <div class="wt-description">
-                                        <p>
-                                          Excepteur sint occaecat cupidatat non proident,
-                                          sunt inlpa officia deserunt molliteu animeta
-                                          idestrume Sed utaiciatis unde omnis iste natus
-                                          error sitame voluptatem accusntium dolorem aquesim
-                                          laudaiumin totam rem aiam eaque ipsa quae
-                                          abillointore veritatis et quasi architecto
-                                          eibeatae vitae dictaan suntise explicabo nemo enim
-                                          ipsam voluptatem quia voluptas.
-                                        </p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <ul class="wt-child">
-                                  <li>
-                                    <div class="wt-author">
-                                      <div class="wt-authordetails">
-                                        <figure>
-                                          <a href="javascript:void(0);"
-                                            ><img
-                                              src="images/author/img-03.jpg"
-                                              alt="image description"
-                                          /></a>
-                                        </figure>
-                                        <div class="wt-authorcontent">
-                                          <div class="wt-authorhead">
-                                            <div class="wt-boxleft">
-                                              <h3>
-                                                <a href="javascript:void(0);"
-                                                  >Floyd Miranda</a
-                                                >
-                                              </h3>
-                                              <span>03 Days Ago</span>
-                                            </div>
-                                            <div class="wt-boxright">
-                                              <a
-                                                class="wt-btnreply"
-                                                href="javascript:void(0);"
-                                                ><span class="wt-clickreply"
-                                                  >Click To Reply</span
-                                                ><i class="fa fa-mail-reply"></i
-                                              ></a>
-                                            </div>
-                                          </div>
-                                          <div class="wt-description">
-                                            <p>
-                                              Excepteur sint occaecat cupidatat non
-                                              proident, sunt inlpatiume officia deserunt
-                                              molliteu animeta idestrume Sed utaiciatis unde
-                                              omnis iste natus error sitame voluptatem
-                                              accuium dolorem aquesim laudaiumin totam rem
-                                              aiam.
-                                            </p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </li>
-                                </ul>
+                                <egate-ad-comment
+                                  *ngFor="let comment of comments"
+                                  [comment]="comment"
+                                ></egate-ad-comment>
                               </li>
-                              
                             </ul>
-            
-                            <div class="wt-commentsbtn">
-                              <button class="wt-btn" type="button">Load More</button>
-                            </div>
                           </div>
-                          <div class="wt-replaybox">
-                            <h2>Leave Your Comment</h2>
-                            <form class="wt-formtheme wt-formleavecomment">
-                              <fieldset>
-                                <div class="form-group">
-                                  <input type="text" name="name" class="form-control" placeholder="Name*">
-                                </div>
-                                <div class="form-group">
-                                  <input type="email" name="email" class="form-control" placeholder="Email*">
-                                </div>
-                                <div class="form-group">
-                                  <input type="text" name="Phone" class="form-control" placeholder="Phone">
-                                </div>
-                                <div class="form-group">
-                                  <input type="text" name="Subect" class="form-control" placeholder="Subect*">
-                                </div>
-                                <div class="form-group">
-                                  <textarea name="message" class="form-control" placeholder="Message*"></textarea>
-                                </div>
-                                <div class="form-group">
-                                  <button class="wt-btn" type="submit">Send</button>
-                                </div>
-                              </fieldset>
-                            </form>
-                          </div>
+                          <div>
+                          <form class="card comment-form" (ngSubmit)="addComment()">
+                            <fieldset [disabled]="isSubmitting">
+                              <div class="card-block">
+                                <textarea class="form-control"
+                                  placeholder="Write a comment..."
+                                  rows="3"
+                                  [formControl]="commentControl"
+                                ></textarea>
+                              </div>
+                              <div class="card-footer">
+                                <img [src]=" 'https://static.productionready.io/images/smiley-cyrus.jpg'" alt="user image" class="comment-author-img" />
+                                <button class="btn btn-sm btn-primary" type="submit">
+                                 Post Comment
+                                </button>
+                              </div>
+                            </fieldset>
+                          </form>
+                        </div>
                         </div>
                       </div>
                     </div>
@@ -234,88 +155,60 @@
                 </div>
               </div>
             </main>
-            
           </div>
           <div
             class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-4 float-left"
           >
             <aside id="wt-sidebar" class="wt-sidebar">
               <div class="wt-proposalsr">
-                <div class="tg-authorcodescan" style="text-align: center;">
-                  
-                   <img src={{ad.author.image}} style="border-radius: 8px;  margin-left: auto;
-                    margin-right: auto;
-                    width: 50%;" />
-                 <br><br> 
-                 <div style="align-items: center;" class="wt-description"> <h4>{{ad.author.username}}</h4></div>
+                <div class="tg-authorcodescan" style="text-align: center">
+                  <img
+                    src="{{ ad.author.image }}"
+                    style="
+                      border-radius: 8px;
+                      margin-left: auto;
+                      margin-right: auto;
+                      width: 50%;
+                    "
+                  />
+                  <br /><br />
+                  <div style="align-items: center" class="wt-description">
+                    <h4>{{ ad.author.username }}</h4>
+                  </div>
                 </div>
-              
+
                 <div class="wt-proposalsrcontent">
-                  
                   <span class="wt-proposalsicon"
                     ><i class="fa fa-angle-double-down"></i
                     ><i class="fa fa-newspaper"></i
                   ></span>
-                  <div class="wt-title" style="display: flex; align-items: center;">
-                    <span style="margin-right: 10px;font-size: 1em;">Number of students:</span>
-                    <h3 style="margin-left: auto;">{{ ad.studentNumber }}</h3>
-                    
+                  <div
+                    class="wt-title"
+                    style="display: flex; align-items: center"
+                  >
+                    <span style="margin-right: 10px; font-size: 1em"
+                      >Number of students:</span
+                    >
+                    <h3 style="margin-left: auto">{{ ad.studentNumber }}</h3>
                   </div>
-                  <div class="wt-title" style="display: flex; align-items: center;">
-                    <span style="margin-right: 10px;font-size: 1em;">Lesson Price:</span>
-                    <h3 style="margin-left: auto;">{{ ad.hourlyRate }}dt</h3>
-                    
+                  <div
+                    class="wt-title"
+                    style="display: flex; align-items: center"
+                  >
+                    <span style="margin-right: 10px; font-size: 1em"
+                      >Lesson Price:</span
+                    >
+                    <h3 style="margin-left: auto">{{ ad.hourlyRate }}dt</h3>
                   </div>
                 </div>
-                
+
                 <div class="wt-clicksavearea">
-                 
                   <a href="javascrip:void(0);" class="wt-clicksavebtn"
                     ><i class="far fa-heart"></i> Click to save</a
                   >
                 </div>
               </div>
-              <div class="wt-widget wt-companysinfo-jobsingle">
-                <div class="wt-companysdetails">
-                  <figure class="wt-companysimg">
-                    <img
-                      src="images/company/img-01.jpg"
-                      alt="img description"
-                    />
-                  </figure>
-                  <div class="wt-companysinfo">
-                    <figure>
-                      <img
-                        src="images/company/img-01.png"
-                        alt="img description"
-                      />
-                    </figure>
-                    <div class="wt-title">
-                      <a href="javascript:void(0);"
-                        ><i class="fa fa-check-circle"></i> Verified Company</a
-                      >
-                      <h2>Angry Creative Studio</h2>
-                    </div>
-                    <ul class="wt-postarticlemeta">
-                      <li>
-                        <a href="javascript:void(0);">
-                          <span>Open Jobs</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0);">
-                          <span>Full Profile</span>
-                        </a>
-                      </li>
-                      <li class="wt-following">
-                        <a href="javascript:void(0);">
-                          <span>Following</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+
               <div class="wt-widget wt-sharejob">
                 <div class="wt-widgettitle">
                   <h2>Share This Job</h2>
@@ -346,7 +239,6 @@
                   </ul>
                 </div>
               </div>
-             
             </aside>
           </div>
         </div>
@@ -354,5 +246,4 @@
     </div>
     <!-- User Listing End-->
   </div>
-  
 </main>

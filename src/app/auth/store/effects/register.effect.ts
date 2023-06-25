@@ -20,7 +20,7 @@ export class RegisterEffect {
       switchMap(({ request }) => {
         return this.authService.register(request).pipe(
           map((currentUser: CurrentUserInterface) => {
-            this.persistanceService.set('accessToken', currentUser.token);
+            
             return registerSuccessAction({ currentUser });
           }),
           catchError((errorResponse: HttpErrorResponse) => {
@@ -38,7 +38,7 @@ export class RegisterEffect {
       this.actions$.pipe(
         ofType(registerSuccessAction),
         tap(() => {
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl('/login');
         }),
       ),
     { dispatch: false },

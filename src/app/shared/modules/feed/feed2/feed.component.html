@@ -1,0 +1,58 @@
+
+
+    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3" >
+      <div class="wt-haslayout wt-dbsectionspace">
+        <div class="wt-dashboardbox">
+          <div class="wt-dashboardboxtitle">
+            <h2>Current Ads</h2>
+          </div>
+          <div class="wt-dashboardboxcontent wt-hiredfreelance">
+            <div class="wt-userlistinghold wt-featured" *ngFor="let ad of (feed$ | async).ads">
+              
+              <figure class="wt-userlistingimg">
+                <img src="{{ad.author.image}}" alt="image description" class="img description">
+              </figure>
+              <div class="wt-proposaldetails">
+                <div class="wt-contenthead">
+                  <div class="wt-title">
+                    <h3><a href="javascript:void(0);">{{ ad.title }}</a><span>{{ ad.description }}</span></h3>
+                    <a href="javascript:void(0)" class="wt-hiredarrow"><i class="lnr lnr-chevron-right"></i></a>
+                  </div>
+                </div>													
+              </div>	
+              
+    
+            </div>
+            																		
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
+      <aside id="wt-sidebar" class="wt-sidebar wt-dashboardsave wt-dbsectionspace">
+        <div class="wt-proposalsr wt-box-shadow">
+          <div class="wt-proposalsrcontent">
+            <figure>
+              <img src="assets/images/thumbnail/img-17.png" alt="image">
+            </figure>
+            <div class="wt-title">
+              <h3>{{(feed$ | async)?.adsCount}}</h3>
+              <span>Total Ongoing Jobs</span>
+            </div>
+          </div> 
+        </div>
+
+        <div class="wt-proposalsr wt-box-shadow" >
+          <div class="wt-proposalsrcontent wt-repostjob">
+            <figure>
+              <img src="assets/images/thumbnail/img-18.png" alt="image">
+            </figure>
+            <div class="wt-title">
+              <h3>10</h3>
+              <span>Total Students</span>
+            </div>
+          </div> 
+        </div>		
+
+    

@@ -31,6 +31,7 @@ export class EditAdComponent implements OnInit {
   ngOnInit(): void {
     this.intiliazeValues();
     this.fetchData();
+    
   }
 
   intiliazeValues(): void {
@@ -44,14 +45,16 @@ export class EditAdComponent implements OnInit {
       map((ad: AdInterface) => {
         return {
           title: ad.title,
-          type: ad.type,
+          type: [''],
           description: ad.description,
-          profilePicture: ad.profilePicture,
+          requiredSkills: ad.requiredSkills,
           location: ad.location,
-          lessonType: ad.lessonType,
+          aboutAuthor: ad.aboutAuthor,
           hourlyRate: ad.hourlyRate,
           subject: ad.subject,
           tagList: ad.tagList,
+          longitude: ad.longitude,
+          latitude: ad.latitude,
         };
       }),
     );

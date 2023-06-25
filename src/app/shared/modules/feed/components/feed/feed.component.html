@@ -31,7 +31,7 @@
                 <aside id="wt-sidebar" class="wt-sidebar">
                   <div class="wt-widget wt-effectiveholder">
                     <div class="wt-widgettitle">
-                      <h2>Categories</h2>
+                      <h2>Tags</h2>
                     </div>
                     <div class="wt-widgetcontent">
                       <form class="wt-formtheme wt-formsearch">
@@ -41,7 +41,7 @@
                               type="text"
                               name="Search"
                               class="form-control"
-                              placeholder="Search Category"
+                              placeholder="Search Tags"
                             />
                             <a href="javascrip:void(0);" class="wt-searchgbtn"
                               ><i class="lnr lnr-magnifier"></i
@@ -49,8 +49,9 @@
                           </div>
                         </fieldset>
                         <fieldset>
+                          
                           <div class="wt-checkboxholder wt-verticalscrollbar">
-                            <span
+                            <div
                               class=""
                               *ngFor="let tag of getTagsFromAds((feed$ | async)?.ads)"
                             > 
@@ -61,16 +62,31 @@
                                 [checked]="selectedTags.includes(tag)"
                                 (change)="onTagSelectionChange(tag, $event)"
                               />
-                              <label> {{ tag }} </label>
-                            </span>
+                              <label> &nbsp;&nbsp;{{ tag }}  </label>
                           </div>
+                          </div>
+                          
                         </fieldset>
+                      <!--  <fieldset>
+                        <div class="wt-checkboxholder wt-verticalscrollbar">
+                          <div *ngFor="let location of getLocationsFromAds((feed$ | async)?.ads)">
+                            <input
+                              type="checkbox"
+                              [id]="'location-' + location"
+                              [value]="location"
+                              [checked]="selectedLocations.includes(location)"
+                              (change)="onLocationSelectionChange(location, $event)"
+                            />
+                            <label>{{ location }}</label>
+                          </div>
+                        </div>
+                      </fieldset>-->
                       </form>
                     </div>
                   </div>
                   <div class="wt-widget wt-effectiveholder">
                     <div class="wt-widgettitle">
-                      <h2>Project Type</h2>
+                      <h2>Location</h2>
                     </div>
                     <div class="wt-widgetcontent">
                       <form class="wt-formtheme wt-formsearch">
@@ -493,61 +509,18 @@
                   <div class="wt-filterholder">
                     <ul class="wt-filtertag">
                       <li class="wt-filtertagclear">
-                        <a href="javascrip:void(0)"
+                        <a href="javascrip:void(0)" (click)="clearAllFilters()"
                           ><i class="fa fa-times"></i>
                           <span>Clear All Filter</span></a
                         >
                       </li>
-                      <li class="alert alert-dismissable fade in">
-                        <a href="javascrip:void(0)"
-                          ><i
-                            class="fa fa-times close"
-                            data-dismiss="alert"
-                            aria-label="close"
-                          ></i>
-                          <span>Graphic Design</span></a
-                        >
+                      <li class="alert alert-dismissable fade in" *ngFor="let tag of selectedTags">
+                        <a href="javascript:void(0)" (click)="removeTag(tag)">
+                          <i class="fa fa-times close" data-dismiss="alert" aria-label="close"></i>
+                          <span>{{ tag }}</span>
+                        </a>
                       </li>
-                      <li class="alert alert-dismissable fade in">
-                        <a href="javascrip:void(0)"
-                          ><i
-                            class="fa fa-times close"
-                            data-dismiss="alert"
-                            aria-label="close"
-                          ></i>
-                          <span>Any Hourly Rate</span></a
-                        >
-                      </li>
-                      <li class="alert alert-dismissable fade in">
-                        <a href="javascrip:void(0)"
-                          ><i
-                            class="fa fa-times close"
-                            data-dismiss="alert"
-                            aria-label="close"
-                          ></i>
-                          <span>Any Freelancer Type</span></a
-                        >
-                      </li>
-                      <li class="alert alert-dismissable fade in">
-                        <a href="javascrip:void(0)"
-                          ><i
-                            class="fa fa-times close"
-                            data-dismiss="alert"
-                            aria-label="close"
-                          ></i>
-                          <span>Chinese</span></a
-                        >
-                      </li>
-                      <li class="alert alert-dismissable fade in">
-                        <a href="javascrip:void(0)"
-                          ><i
-                            class="fa fa-times close"
-                            data-dismiss="alert"
-                            aria-label="close"
-                          ></i>
-                          <span>English</span></a
-                        >
-                      </li>
+                      
                     </ul>
                   </div>
 
@@ -572,22 +545,22 @@
                           <li>
                             <span
                               ><i class="fa fa-dollar-sign wt-viewjobdollar"></i
-                              >Professional</span
+                              >Hourly Rate: {{ad.hourlyRate}}DT</span
                             >
                           </li>
                           <li>
                             <span
                               ><em
                                 ><img
-                                  src="/assets/images/flag/img-01.png"
-                                  alt="img description" /></em
-                              >United Emirates</span
+                                  src="/assets/images/flag/marker.png" 
+                                  /></em
+                              >State: {{ad.location}}</span
                             >
                           </li>
                           <li>
                             <span
                               ><i class="far fa-folder wt-viewjobfolder"></i>Type:
-                              Per Hour</span
+                              {{ad.type}}</span
                             >
                           </li>
                           <li>
@@ -596,17 +569,14 @@
                               >{{ ad.createdAt | date : 'medium' }}</span
                             >
                           </li>
-                          <li>
-                            <span
-                              ><i class="fa fa-tag wt-viewjobtag"></i>Job ID:
-                              gy3yV2Vm5u</span
-                            >
-                          </li>
-                          <li>
-                            <a href="javascript:void(0);" class="wt-clicklike"
-                              ><i class="fa fa-heart"></i> Click to Save</a
-                            >
-                          </li>
+                          
+                          
+                            <egate-add-to-favorites
+                              [isFavorited]="ad.favorited"
+                              [adSlug]="ad.slug"
+                              [favoritesCount]="ad.reccCount">
+                              </egate-add-to-favorites>
+                          
                           <li class="wt-btnarea">
                             <a [routerLink]="['/ads', ad.slug]" class="wt-btn"
                               >View</a

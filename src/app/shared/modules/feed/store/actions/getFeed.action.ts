@@ -7,6 +7,7 @@ export const getFeedAction = createAction(
   props<{ url: string }>(),
 );
 
+
 export const getFeedSuccessAction = createAction(
   ActionTypes.GET_FEED_SUCCESS,
   props<{ feed: GetFeedResponseInterface }>(),

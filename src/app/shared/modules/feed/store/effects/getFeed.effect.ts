@@ -28,5 +28,8 @@ export class GetFeedEffect {
     ),
   );
 
+
+
   constructor(private actions$: Actions, private feedService: FeedService) {}
 }
+

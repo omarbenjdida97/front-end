@@ -5,17 +5,20 @@ export interface AdInterface {
   slug: string;
   subject: string;
   title: string;
-  type: string;
+  type: string[];
   hourlyRate: number;
   description: string;
   location: string;
-  profilePicture: string | null;
-  lessonType: string;
+  requiredSkills: string[];
+  aboutAuthor: string;
   createdAt: string;
   updatedAt: string;
   tagList: PopularTagType[];
   reccCount: number;
   studentNumber: number;
+  longitude: number;
+  latitude: number;
   favorited: boolean;
   author : ProfileInterface;
+  acceptedApplicants : ProfileInterface[];
 }

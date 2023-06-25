@@ -33,7 +33,7 @@
                       <a href="javascript:void(0);">Browse Ads</a>
                       <ul class="sub-menu">
                         <li>
-                          <a href="joblisting.html">Ad Listing</a>
+                          <a [routerLink]="['/ads']">Ad Listings</a>
                         </li>
                       </ul>
                     </li>
@@ -68,7 +68,7 @@
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <strong class="wt-logo"
-              ><a href="index-2.html">
+              ><a [routerLink]="['/']">
                 <img src="/assets/images/logo.png" alt="company logo here" /></a
             ></strong>
             <div class="wt-rightarea">
@@ -97,10 +97,10 @@
                       <a href="javascript:void(0);">Browse Ads</a>
                       <ul class="sub-menu">
                         <li>
-                          <a href="joblisting.html">Ad Listings</a>
+                          <a [routerLink]="['/ads']">Ad Listings</a>
                         </li>
                         <li class="current-menu-item">
-                          <a href="jobsingle.html">Post Ad</a>
+                          <a [routerLink]="['/ads/new']">Post Ad</a>
                         </li>
                       </ul>
                     </li>
@@ -126,11 +126,11 @@
                     <li>
                       <a
                         [routerLink]="[
-                          '/profiles',
+                          '/dashboard',
                           (currentUser$ | async).username
                         ]"
                       >
-                        <span>My Profile</span>
+                        <span>My Dashboard</span>
                       </a>
                     </li>
                    
@@ -140,25 +140,22 @@
                       </a>
                     </li>
                     <li class="">
-                      <a href="javascript:void(0);">
+                      <a [routerLink]="[
+                      '/chat']">
                         <span>Messages</span>
                       </a>
-                      <ul class="sub-menu">
-                        <li><a href="dashboard-messages.html">Messages</a></li>
-                        <li>
-                          <a href="dashboard-messages2.html">Messages V 2</a>
-                        </li>
-                      </ul>
+                      
                     </li>
                    
                     <li>
-                      <a href="dashboard-accountsettings.html">
+                      <a [routerLink]="[
+                      '/settings']">
                         <span>Account Settings</span>
                       </a>
                     </li>
                     
                     <li>
-                      <a href="index-2.html">
+                      <a (click)="logout()">
                         <span>Logout</span>
                       </a>
                     </li>

@@ -4,6 +4,7 @@ import { TopTagsStateInterface } from 'src/app/shared/modules/topTags/types/topT
 import { AdStateInterface } from 'src/app/ad/types/adState.interface';
 import { CreateAdStateInterface } from 'src/app/createAd/types/createAdState.interface';
 import { EditAdStateInterface } from 'src/app/editAd/types/editAdState.interface';
+import { SettingsStateInterface } from 'src/app/settings/types/settingsState.interface';
 
 export interface AppStateInterface {
   auth: AuthStateInterface;
@@ -12,4 +13,5 @@ export interface AppStateInterface {
   ad: AdStateInterface;
   createAd: CreateAdStateInterface;
   editAd: EditAdStateInterface;
+  settings: SettingsStateInterface
 }

@@ -8,6 +8,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { CreateAdEffect } from 'src/app/createAd/store/effects/createAd.effect';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from 'src/app/createAd/store/reducers';
+import { SidebarModule } from '../shared/modules/sideBar/sidebar.module';
 
 const routes = [{ path: 'ads/new', component: CreateAdComponent }];
 
@@ -18,6 +19,7 @@ const routes = [{ path: 'ads/new', component: CreateAdComponent }];
     AdFormModule,
     EffectsModule.forFeature([CreateAdEffect]),
     StoreModule.forFeature('createAd', reducers),
+    SidebarModule
   ],
   declarations: [CreateAdComponent],
   providers: [CreateAdService],

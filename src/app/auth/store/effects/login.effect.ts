@@ -17,11 +17,11 @@ export class LoginEffect {
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loginAction),
-      switchMap(({ request }) => {
+      switchMap(({ request, returnUrl}) => {
         return this.authService.login(request).pipe(
           map((currentUser: CurrentUserInterface) => {
             this.persistanceService.set('accessToken', currentUser.token);
-            return loginSuccessAction({ currentUser });
+            return loginSuccessAction({ currentUser, returnUrl });
           }),
           catchError((errorResponse: HttpErrorResponse) => {
             return of(
@@ -37,13 +37,16 @@ export class LoginEffect {
     () =>
       this.actions$.pipe(
         ofType(loginSuccessAction),
-        tap(() => {
-          this.router.navigateByUrl('/');
+        tap(({ returnUrl }) => {
+          if (returnUrl) {
+            this.router.navigateByUrl(returnUrl);
+          } else {
+            this.router.navigateByUrl('/');
+          }
         }),
       ),
     { dispatch: false },
   );
-
   constructor(
     private actions$: Actions,
     private authService: AuthService,
